@@ -1,1 +1,26 @@
-test
+---
+# windows_servers.yml
+all:
+  # The 'hosts' and 'groups' keys must be under 'children'
+  children:
+    # 1. Define the 'hosts' at the top level (optional, but cleaner)
+    # This is not strictly needed if all hosts are listed under groups
+    # However, let's keep it simple and focus on the groups for organization.
+    
+    # 2. Define the 'groups' as children of 'all'
+    windows_prod:
+      hosts:
+        10.128.235.111:
+          # Host-specific variables can go here
+          
+    windows_dev:
+      hosts:
+        10.128.235.112:
+          # Host-specific variables can go here
+          
+  # Global Variables applied to ALL hosts in this inventory
+  vars:
+    ansible_connection: winrm
+    ansible_port: 5986
+    ansible_winrm_transport: ntlm
+    ansible_winrm_server_cert_validation: ignore
